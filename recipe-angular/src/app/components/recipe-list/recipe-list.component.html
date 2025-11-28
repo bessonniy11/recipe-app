@@ -1,0 +1,11 @@
+<div class="grid">
+  @if (recipes.length > 0) {
+    @for (recipe of recipes; track recipe.id) {
+      <div class="grid__item">
+        <app-recipe-card [recipe]="recipe" />
+      </div>
+    }
+  } @else {
+    <p class="grid__empty">Рецепты не найдены.</p>
+  }
+</div>

@@ -1,0 +1,58 @@
+<main class="detail" *ngIf="recipe() as recipe">
+  <div class="detail__container">
+    <div class="detail__back">
+      <button (click)="goBack()" class="back-btn">
+        <span aria-hidden="true">←</span>
+        <span>Назад</span>
+      </button>
+      <a [routerLink]="['/']" class="back-link">На главную</a>
+    </div>
+
+    <div class="detail__grid">
+      <div class="detail__media">
+        <div class="slider">
+          <div class="slider__frame">
+            <img [src]="gallery()[currentIndex()]" [alt]="recipe.name" />
+          </div>
+          <div class="slider__controls" *ngIf="gallery().length > 1">
+            <button class="pill-btn" (click)="goPrev()">Назад</button>
+            <div class="dots">
+              <span
+                *ngFor="let item of gallery(); let i = index"
+                class="dot"
+                [class.dot--active]="i === currentIndex()"
+              ></span>
+            </div>
+            <button class="pill-btn" (click)="goNext()">Далее</button>
+          </div>
+        </div>
+        <div class="summary">
+          <h2>{{ recipe.name }}</h2>
+          <p>{{ recipe.description }}</p>
+        </div>
+      </div>
+
+      <div class="detail__info">
+        <section class="card-block">
+          <h3>Ингредиенты</h3>
+          <ul>
+            <li *ngFor="let item of recipe.ingredients">
+              <span class="bullet"></span>
+              <span>{{ item }}</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card-block">
+          <h3>Шаги</h3>
+          <ol>
+            <li *ngFor="let step of recipe.instructions; let i = index">
+              <span class="step-index">{{ i + 1 }}</span>
+              <span>{{ step }}</span>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
