@@ -1,0 +1,17 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid__item {
+  height: 100%;
+}
+
+.grid__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #6b6b6f;
+  margin: 0;
+  padding: 1rem 0;
+}
