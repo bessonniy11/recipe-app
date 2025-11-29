@@ -36,19 +36,7 @@ jobs:
       - name: Build Angular application
         run: npm run build -- --configuration=production # Используйте вашу команду сборки
 
-      - name: Deploy to Server # ЭТОТ ШАГ ТРЕБУЕТ ВАШЕГО УТОЧНЕНИЯ
+      - name: Deploy to Server
         run: |
-          # Здесь будут команды для деплоя. Например:
-          # - scp -r projects/frontend/dist/your-app-name/* user@recipe.dev.ibessonniy.ru:/var/www/recipe.dev.ibessonniy.ru/
-          # - rsync -avz --delete projects/frontend/dist/your-app-name/* user@recipe.dev.ibessonniy.ru:/var/www/recipe.dev.ibessonniy.ru/
-          # - Вызовите CLI вашего хостинга
-          #
-          # Вам потребуется настроить SSH-ключи или другие секреты GitHub
-          # Например, с использованием ssh-agent:
-          # - uses: webfactory/ssh-agent@v0.8.0
-          #   with:
-          #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # - run: scp -r ... (используйте SSH_PRIVATE_KEY)
-
-          echo "ПОЖАЛУЙСТА, ОБНОВИТЕ ЭТОТ ШАГ С ВАШИМИ ИНСТРУКЦИЯМИ ПО ДЕПЛОЮ!"
-          exit 1 # Чтобы workflow завершился ошибкой, если этот шаг не будет обновлен
+          rsync -e "ssh -p 22 -o StrictHostKeyChecking=no" --archive --compress --delete \
+            projects/frontend/dist/recipe-angular/ strizhki@recipe.dev.ibessonniy.ru:/var/www/recipe.dev.ibessonniy.ru/
