@@ -1,0 +1,49 @@
+name: Deploy Frontend to recipe.dev.ibessonniy.ru (Dev)
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - 'projects/frontend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive' # Важно для работы с подмодулями
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Используйте актуальную версию Node.js для вашего Angular проекта
+
+      - name: Navigate to frontend submodule
+        run: cd projects/frontend
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular application
+        run: npm run build -- --configuration=production # Используйте вашу команду сборки
+
+      - name: Deploy to Server # ЭТОТ ШАГ ТРЕБУЕТ ВАШЕГО УТОЧНЕНИЯ
+        run: |
+          # Здесь будут команды для деплоя. Например:
+          # - scp -r projects/frontend/dist/your-app-name/* user@recipe.dev.ibessonniy.ru:/var/www/recipe.dev.ibessonniy.ru/
+          # - rsync -avz --delete projects/frontend/dist/your-app-name/* user@recipe.dev.ibessonniy.ru:/var/www/recipe.dev.ibessonniy.ru/
+          # - Вызовите CLI вашего хостинга
+          #
+          # Вам потребуется настроить SSH-ключи или другие секреты GitHub
+          # Например, с использованием ssh-agent:
+          # - uses: webfactory/ssh-agent@v0.8.0
+          #   with:
+          #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # - run: scp -r ... (используйте SSH_PRIVATE_KEY)
+
+          echo "ПОЖАЛУЙСТА, ОБНОВИТЕ ЭТОТ ШАГ С ВАШИМИ ИНСТРУКЦИЯМИ ПО ДЕПЛОЮ!"
+          exit 1 # Чтобы workflow завершился ошибкой, если этот шаг не будет обновлен
