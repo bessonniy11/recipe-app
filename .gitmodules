@@ -1,9 +1,9 @@
-[submodule "frontend"]
-	path = frontend
+[submodule "projects/frontend"]
+	path = projects/frontend
 	url = https://github.com/bessonniy11/recipe-app-frontend.git
-[submodule "backend"]
-	path = backend
+[submodule "projects/backend"]
+	path = projects/backend
 	url = https://github.com/bessonniy11/recipe-app-backend.git
-[submodule "shared-entities"]
-	path = shared-entities
+[submodule "projects/shared-entities"]
+	path = projects/shared-entities
 	url = https://github.com/bessonniy11/recipe-app-shared-entities.git
